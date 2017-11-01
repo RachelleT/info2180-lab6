@@ -9,43 +9,24 @@
         <div>
             <form action="request.php" method="get" id = "definitions">
                 Word:<input type="text" word="word" id = "definition">
-                <button type="button" onclick="makeRequest('request.php?q=')">Search</button>
+                <button type="button" onclick="makeRequest('request.php?q=definition')">Search</button>
             </form>
         </div>
 		<script type="text/javascript">
             function makeRequest(url){
-                     var httpRequest = new XMLHttpRequest();
-					 var results = document.getElementById("definition").value;
-                     httpRequest.onreadystatechange = function()
+                     var req = new XMLHttpRequest();
+					 var reply = " ";
+                     req.onreadystatechange = function()
                      {
-                         if (httpRequest.readyState == XMLHttpRequest.DONE) 
+                         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) 
                          {
-                             if(httpRequest.status == 200)
-                             { 
-                                alert(httpRequest.responseText);
-                             }
+                                alert(req.responseText);
                          }
                      };
-                    httpRequest.open('GET',url +results,true);
-                    httpRequest.send();
+                    req.open("GET","request.php?q=definition",true);
+                    req.send();
+
                  }
-        function makeRequestForAll(url){
-                     var httpRequest1 = new XMLHttpRequest();
-                     
-                     httpRequest1.onreadystatechange = function()
-                     {
-                         if (httpRequest1.readyState == XMLHttpRequest.DONE) 
-                         {
-                             if(httpRequest1.status == 200)
-                             {   
-                                 var t = document.createTextNode("httpRequest.responseText");                                                                                                                                                                                                                 
-                                 alert(httpRequest.responseText);
-                             }
-                         }
-                     };
-                    httpRequest1.open('GET',url,true);
-                    httpRequest1.send();
-        }
     </script>
 	</body>
 </html>
