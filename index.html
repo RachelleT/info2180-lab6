@@ -1,29 +1,29 @@
 <html>
 	<head>
-        <title>Lab6</title>
+        <title>Web Dictionary</title>
     </head>
     <body>
         <div style='background-color: purple;'>
-            <h1 style='color: yellow'> Web Dictionary </h1> 
+            <h1 style='color: white'> Web Dictionary </h1> 
         </div>
         <div>
             <form action="request.php" method="get" id = "definitions">
                 Word:<input type="text" word="word" id = "definition">
-                <button type="button" onclick="makeRequest('request.php?q=definition')">Search</button>
+                <button type="button" onclick="dRequest('request.php?q')">Search</button>
             </form>
         </div>
 		<script type="text/javascript">
-            function makeRequest(url){
+            function dRequest(url){
                      var req = new XMLHttpRequest();
-					 var reply = " ";
+                     var reply  = "=definition";
                      req.onreadystatechange = function()
                      {
                          if (req.readyState == XMLHttpRequest.DONE && req.status == 200) 
                          {
-                                alert(req.responseText);
+                            alert(req.responseText);
                          }
                      };
-                    req.open("GET","request.php?q=definition",true);
+                    req.open("GET", url + reply ,true);
                     req.send();
 
                  }
