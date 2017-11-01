@@ -8,24 +8,28 @@
         </div>
         <div>
             <form action="request.php" method="get" id = "definitions">
-                Word:<input type="text" word="word" id = "definition">
-                <button type="button" onclick="dRequest('request.php?q')">Search</button>
+                Word:<input type="text" word="word" id = "define">
+                <button type="button" onclick="dRequest('request.php?q=')">Search</button>
             </form>
+            <div id = "results"> <ol></ol></div>
         </div>
 		<script type="text/javascript">
             function dRequest(url){
                      var req = new XMLHttpRequest();
-                     var reply  = "=definition";
+                     //var reply  = "definition";
+                     var results  = document.getElementById("define").value;
+                     
                      req.onreadystatechange = function()
                      {
                          if (req.readyState == XMLHttpRequest.DONE && req.status == 200) 
                          {
-                            alert(req.responseText);
+                            document.getElementById("results").innerHTML= req.responseText;
+                            //alert(req.responseText);
                          }
                      };
-                    req.open("GET", url + reply ,true);
+                    //req.open("GET", url + reply ,true);
+                    req.open("GET", url + results ,true);
                     req.send();
-
                  }
     </script>
 	</body>
