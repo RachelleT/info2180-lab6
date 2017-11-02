@@ -10,8 +10,10 @@
             <form action="request.php" method="get" id = "definitions">
                 Word:<input type="text" word="word" id = "define">
                 <button type="button" onclick="dRequest('request.php?q=')">Search</button>
+                <button type="button" onclick="allRequest('request.php?q=&all=true')"+> Get All Definitions </button>
             </form>
-            <div id = "results"> Results <ol></ol></div>
+            <div> Result </div>
+            <div id = "results">  <ol></ol></div>
         </div>
 		<script type="text/javascript">
             function dRequest(url){
@@ -21,16 +23,39 @@
                      
                      req.onreadystatechange = function()
                      {
-                         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) 
+                         if (req.readyState == 4 && req.status == 200) 
                          {
                             document.getElementById("results").innerHTML= req.responseText;
                             //alert(req.responseText);
                          }
                      };
                     //req.open("GET", url + reply ,true);
-                    req.open("GET", url + results ,true);
+                    req.open("GET", url + results , true);
                     req.send();
-                 }
+            }
+            function allRequest(url){
+                     var aReq = new XMLHttpRequest();
+                     
+                     aReq.onreadystatechange = function()
+                     {
+                         if (aReq.readyState == 4 && aReq.status == 200) 
+                         {
+                            var ol = document.createElement("ol");
+                            var li = document.createElement("li");
+                            var h3 = document.getElementById("define").value;
+                            var paragraph1 = document.getElementsById();
+                            var paragraph2 = document.getElementById("name");
+                            
+                            li.appendChild(h3);
+                            li.appendChild(paragraph1);
+                            li.appendChild(paragraph2);
+                            ol.appendChild(li);
+                            document.body.appendChild(ol);                                                                                                                                                                                                               
+                        }
+                    }
+                    aReq.open('GET', url , true);
+                    aReq.send();
+			}
     </script>
 	</body>
 </html>
